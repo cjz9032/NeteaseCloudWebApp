@@ -1,8 +1,9 @@
 <template>
     <div>
       <div class="loading-wrapper" v-if="isloading" >
-          <div class="loading"></div>
-          <div class="loading-txt">正在加载中</div>
+          <div class="loading-txt">
+            <mu-circular-progress :size="70" color="red" class="ss" />
+          </div>
       </div>
       <div class="container" v-show="!isloading">
       <div id="slider">
@@ -20,7 +21,7 @@
         <mu-flexbox-item basis="28%" class="item" :key="item.id" v-for="item in playList">
           <router-link :to="{name: 'playListDetail',params: { id: item.id, name: item.name, coverImg: item.coverImgUrl, creator: item.creator, count: item.playCount, desc: item.description }}">
           <div class="bar">{{item.playCount | formatCount}}</div>
-          <img class="item-img img-response" :src="item.coverImgUrl + '?param=230y230'" lazy="loading">
+          <img class="item-img img-response" :src="item.coverImgUrl | toDefImg | toCoverSizeImg" lazy="loading">
           <div class="item-name">{{item.name}}</div>
           </router-link>
         </mu-flexbox-item>
@@ -199,10 +200,12 @@ export default {
   },
   methods: {
     get () {
-      this.$http.get(api.getPlayListByWhere('全部', 'hot', 0, true, 6)).then((res) => {
+      this.$http.get(api.getPlayListByWhere('全部', 'hot', 0, true, 6))
+      .then((res) => {
         this.isloading = false
         this.playList = res.data.playlists
       })
+      // .catch()
     }
   },
   filters: {
