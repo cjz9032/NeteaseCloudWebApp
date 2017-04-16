@@ -1,8 +1,7 @@
 import axios from 'axios'
-import Bus from './evt-bus.js'
 // import env from 'axios'
 
-axios.defaults.timeout = 100
+axios.defaults.timeout = 3000
 // override request
 axios.interceptors.request.use((config) => {
   // Do something before request is sent
@@ -25,7 +24,6 @@ axios.interceptors.response.use((res) => {
   // timeout
   if (error.code === 'ECONNABORTED') {
     // check network is working well
-    Bus.$emit('error:network', error)
   }
   console.log('promise error:' + error)
   return Promise.reject(error)

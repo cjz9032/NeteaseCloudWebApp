@@ -21,7 +21,7 @@
         <mu-flexbox-item basis="28%" class="item" :key="item.id" v-for="item in playList">
           <router-link :to="{name: 'playListDetail',params: { id: item.id, name: item.name, coverImg: item.coverImgUrl, creator: item.creator, count: item.playCount, desc: item.description }}">
           <div class="bar">{{item.playCount | formatCount}}</div>
-          <img class="item-img img-response" :src="item.coverImgUrl | toDefImg | toCoverSizeImg" lazy="loading">
+          <img class="item-img img-response" v-lazy="item.coverImgUrl" cover-size="230y230" def-img="true">
           <div class="item-name">{{item.name}}</div>
           </router-link>
         </mu-flexbox-item>
@@ -110,11 +110,6 @@
       min-height: 5rem;
     }
 
-    &-img[lazy=loading] {
-      background: url('../../static/default_cover.png') no-repeat;
-      background-size: cover;
-    }
-
     &-name {
       overflow : hidden;
       font-size: 12px;
@@ -200,12 +195,10 @@ export default {
   },
   methods: {
     get () {
-      this.$http.get(api.getPlayListByWhere('全部', 'hot', 0, true, 6))
-      .then((res) => {
+      this.$http.get(api.getPlayListByWhere('全部', 'hot', 0, true, 6)).then((res) => {
         this.isloading = false
         this.playList = res.data.playlists
       })
-      // .catch()
     }
   },
   filters: {
