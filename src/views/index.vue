@@ -1,6 +1,7 @@
 <template>
     <div>
       <div class="fixed-bar">
+        
       <mu-appbar>
         <div class="logo" slot="left"></div>
         <mu-icon-button icon='search'  slot="right"/>

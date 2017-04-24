@@ -12,7 +12,8 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd
 
 module.exports = {
   entry: {
-    app: './src/main.js'
+    app: './src/main.js',
+    admin: './src/admin.js'
   },
   output: {
     path: config.build.assetsRoot,
@@ -26,7 +27,8 @@ module.exports = {
       'vue$': 'vue/dist/vue.common.js',
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
-      'components': path.resolve(__dirname, '../src/components')
+      'components': path.resolve(__dirname, '../src/components'),
+      'muse-el': 'muse-ui/src'
     }
   },
   resolveLoader: {
@@ -83,6 +85,10 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: /muse-ui.src.*?js$/,
+        loader: 'babel-loader'
       }
     ]
   },

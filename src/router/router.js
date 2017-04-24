@@ -24,7 +24,11 @@ const router = new VueRouter({
       },
       {
         path: 'hotSinger',
-        component: require('../views/hotSinger')
+        component: function (resolve) {
+          require.ensure(['../views/hotSinger'], function () {
+            resolve(require('../views/hotSinger'))
+          }, 'hot-singer')
+        }
       }
     ]
   }, {
