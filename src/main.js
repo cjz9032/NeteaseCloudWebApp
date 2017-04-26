@@ -1,3 +1,4 @@
+import 'babel-polyfill'
 import Vue from 'vue'
 import App from './App'
 import axiosI from './utils/custom-axios'
@@ -9,7 +10,6 @@ import toast from './components/toast.vue'
 import museEl from './muse-el'
 import 'assets/theme.less'
 import VueLazyload from 'vue-lazyload'
-
 Vue.use(museEl)
 Vue.use(VueLazyload, {
   preLoad: 1,
