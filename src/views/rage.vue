@@ -16,6 +16,7 @@
         </swiper>
       </div>
       <div class="wrapper">
+      <gradient-text class="my-gt-wrap" direction="right" text="孙丹丹你484傻" from="#e4bb24" to="#e40088"></gradient-text>
       <div class="g-title song-list">推荐歌单 <router-link :to="{path: '/index/songList'}">更多></router-link></div>
       <mu-flexbox wrap="wrap" justify="space-around" class="box" :gutter="0">
         <mu-flexbox-item basis="28%" class="item" :key="item.id" v-for="item in playList">
@@ -54,6 +55,10 @@
     </div>
 </template>
 <style lang="less" scoped>
+  .my-gt-wrap{
+    text-align: center;
+    font-size: 22px;
+  }
   .img-response {
     max-width: 100%;
     height: auto;
@@ -173,6 +178,7 @@
 </style>
 <script>
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import gradientText from '../components/gradientText'
 import api from '../api'
 export default {
   data () {
@@ -188,7 +194,8 @@ export default {
   },
   components: {
     swiper,
-    swiperSlide
+    swiperSlide,
+    gradientText
   },
   created () {
     this.get()
